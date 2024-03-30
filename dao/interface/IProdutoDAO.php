@@ -4,5 +4,5 @@ namespace dao\interface;
 
 interface IProdutoDAO
 {
-    public function listar();
+    public function index();
 }

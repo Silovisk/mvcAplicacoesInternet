@@ -1,17 +1,24 @@
 <?php
+
 namespace generic;
-class View {
-    private function cabecalho() {
-        return "<div> Cabecalho</div>";
-    }
-    private function rodape(){
-        return "<div> Rodape </div>";
+
+class View
+{
+    private function cabecalho()
+    {
+        // return include ROOT_PATH.'\public\cabecalho.php';
     }
 
-    public function conteudo($caminho,$param = array()){
+    private function rodape()
+    {
+        // return include ROOT_PATH.'\public\rodape.php';
+    }
+
+    public function conteudo($caminho, $param = [], $script = '')
+    {
         echo $this->cabecalho();
         include $caminho;
         echo $this->rodape();
+        echo $script;
     }
 }
-?>

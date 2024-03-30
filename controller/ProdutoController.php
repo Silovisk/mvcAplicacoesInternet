@@ -16,9 +16,41 @@ class ProdutoController
         $this->produtoService = new ProdutoService();
     }
 
-    public function listarProdutos()
+    public function index()
     {
-        $lista = $this->produtoService->listar();
-        $this->produtoView->listaProdutos($lista);
+        $lista = $this->produtoService->index();
+        $this->produtoView->index($lista);
+    }
+
+    public function create()
+    {
+        $this->produtoView->create();
+    }
+
+    public function store()
+    {
+        $response = $this->produtoService->store();
+        header('Content-Type: application/json');
+        echo $response;
+    }
+
+    public function edit($id)
+    {
+        $produto = $this->produtoService->edit($id);
+        $this->produtoView->edit($produto);
+    }
+
+    public function update()
+    {
+        $response = $this->produtoService->update();
+        header('Content-Type: application/json');
+        echo $response;
+    }
+
+    public function destroy()
+    {
+        $response = $this->produtoService->destroy();
+        header('Content-Type: application/json');
+        echo $response;
     }
 }
