@@ -45,7 +45,7 @@ if (isset($param['produto'])) {
                 </div>
             </div>
         </div>
-        <a href="/mvc2024/produtos/index" class="btn btn-secondary">Voltar</a>
+        <a href="/mvcAplicacoesInternet/produtos/index" class="btn btn-secondary">Voltar</a>
         <button type="submit" class="btn btn-primary">Editar</button>
     </form>
     <div id="message"></div>
@@ -69,7 +69,7 @@ if (isset($param['produto'])) {
             const form = event.target;
             const data = new FormData(form);
             console.log(data);
-            fetch('/mvc2024/produtos/update', {
+            fetch('/mvcAplicacoesInternet/produtos/update', {
                 method: 'POST',
                 body: data,
             })
@@ -85,7 +85,7 @@ if (isset($param['produto'])) {
                         confirmButtonText: "OK",
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            window.location.href = '/mvc2024/produtos/index';
+                            window.location.href = '/mvcAplicacoesInternet/produtos/index';
                         }
                     });
                     document.getElementById('product-form').reset();

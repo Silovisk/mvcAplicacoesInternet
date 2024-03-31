@@ -1,6 +1,6 @@
 <?php include 'public/header.php'; ?>
 
-<link rel="stylesheet" href="\mvc2024\public\css\user\index.css">
+<link rel="stylesheet" href="\mvcAplicacoesInternet\public\css\user\index.css">
 
 <div class="loginBox"> <img class="user" src="https://i.ibb.co/yVGxFPR/2.png" height="100px" width="100px">
     <h3>Registrar</h3>
@@ -35,7 +35,7 @@
                 showConfirmButton: true,
                 timer: 15000,
             }).then(() => {
-                window.location.href = "/mvc2024/user/login";
+                window.location.href = "/mvcAplicacoesInternet/user/login";
             });
         })
         .catch(error => {

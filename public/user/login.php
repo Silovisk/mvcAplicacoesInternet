@@ -1,6 +1,6 @@
 <?php include 'public/header.php'; ?>
 
-<link rel="stylesheet" href="\mvc2024\public\css\user\index.css">
+<link rel="stylesheet" href="\mvcAplicacoesInternet\public\css\user\index.css">
 
 
 <div class="loginBox"> <img class="user" src="https://i.ibb.co/yVGxFPR/2.png" height="100px" width="100px">
@@ -65,7 +65,7 @@
                     icon: "success",
                     title: "Login bem-sucedido"
                 }).then(() => {
-                    window.location.href = "/mvc2024/produtos/index";
+                    window.location.href = "/mvcAplicacoesInternet/produtos/index";
                 });
             } else {
                 const Toast = Swal.mixin({
