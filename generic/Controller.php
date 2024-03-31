@@ -17,12 +17,21 @@ class Controller
         //         'produtos/destroy' => new Acao('controller\ProdutoController', 'destroy'),
         //         'produtos/edit' => new Acao('controller\ProdutoController', 'edit'),
         //         ];
+
+        # Produto
         foreach ($actions as $action) {
             $this->arrChamadas["produtos/$action"] = new Acao('controller\ProdutoController', $action);
         }
-
         $this->arrChamadas['produtos/edit/:id'] = new Acao('controller\ProdutoController', 'edit');
-    }
+
+        # User
+        $this->arrChamadas['user/login'] = new Acao('controller\UserController', 'login');
+        $this->arrChamadas['user/register'] = new Acao('controller\UserController', 'register');
+        $this->arrChamadas['user/store'] = new Acao('controller\UserController', 'store');
+        $this->arrChamadas['user/authLogin'] = new Acao('controller\UserController', 'authLogin');
+
+        // echo '<pre>'; print_r($this->arrChamadas); echo '</pre>';
+        }   
 
     public static function getInstance()
     {
