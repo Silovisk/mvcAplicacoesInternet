@@ -6,10 +6,11 @@ use generic\View;
 
 class ProdutosView extends View
 {
-    public function index($lista)
+    public function index($lista, $categorias)
     {
         $param = [
             'lista' => $lista,
+            'categorias' => $categorias,
         ];
         $this->conteudo('public/produto/index.php', $param);
     }

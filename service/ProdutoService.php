@@ -30,4 +30,9 @@ class ProdutoService extends ProdutoDAO
     {
         return parent::destroy();
     }
+
+    public function getcategories()
+    {
+        return parent::getcategories();
+    }
 }

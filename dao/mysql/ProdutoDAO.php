@@ -89,4 +89,23 @@ class ProdutoDAO extends MysqlFactory implements IProdutoDAO
             return json_encode(['status' => 'error', 'message' => $e->getMessage()]);
         }
     }
+
+    public function filterCategory($categoria)
+    {
+        $data = json_decode(file_get_contents('php://input'), true);
+
+        $sql = 'SELECT * FROM produtos WHERE categoria = :categoria';
+        $param = [
+            'categoria' => $data['categoria']
+        ];
+    
+        return $this->banco->executar($sql, $param);
+    }   
+
+    public function getcategories()
+    {
+        $sql = 'SELECT DISTINCT categoria FROM produtos';
+
+        return $this->banco->executar($sql);
+    }
 }

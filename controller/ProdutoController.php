@@ -19,7 +19,9 @@ class ProdutoController
     public function index()
     {
         $lista = $this->produtoService->index();
-        $this->produtoView->index($lista);
+        $categorias = $this->produtoService->getcategories();
+
+        $this->produtoView->index($lista, $categorias);
     }
 
     public function create()
