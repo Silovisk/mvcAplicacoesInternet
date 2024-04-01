@@ -35,4 +35,9 @@ class ProdutoService extends ProdutoDAO
     {
         return parent::getcategories();
     }
+
+    public function filterCategory()
+    {
+        return parent::filterCategory();
+    }   
 }

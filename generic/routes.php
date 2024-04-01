@@ -11,7 +11,9 @@ $actions = ['index', 'create', 'store', 'update', 'destroy'];
 foreach ($actions as $action) {
     $controller->addRoute("produtos/$action", new Acao('controller\ProdutoController', $action));
 }
+
 $controller->addRoute('produtos/edit/:id', new Acao('controller\ProdutoController', 'edit'));
+$controller->addRoute('produtos/index/filtraCategoria', new Acao('controller\ProdutoController', 'filterCategory'));
 
 # User
 $controller->addRoute('user/login', new Acao('controller\UserController', 'login'));

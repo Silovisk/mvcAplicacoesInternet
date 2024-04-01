@@ -85,7 +85,7 @@ $categorias = array_map(function ($categoria) {
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-        <form method="get" id="form-filter">
+        <form id="form-filter">
             <div class="row">
                 <div class="mb-3">
                     <label for="categoria" class="form-label">Categoria</label>
@@ -99,9 +99,9 @@ $categorias = array_map(function ($categoria) {
                     </select>
                 </div>
 
-                <!-- <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary">Filtrar</button>
-            </div> -->
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                </div>
             </div>
         </form>
     </div>
@@ -114,6 +114,7 @@ $categorias = array_map(function ($categoria) {
         init: () => {
             PageProducts.initDataTables();
             PageProducts.handleFilter();
+            PageProducts.filter();
         },
 
         initDataTables: () => {
@@ -175,6 +176,7 @@ $categorias = array_map(function ($categoria) {
                 });
         },
 
+        // Filter Client Side
         handleFilter: () => {
             document.getElementById('categoria').addEventListener('change', function () {
                 var table = $('#table-products').DataTable();
@@ -182,37 +184,33 @@ $categorias = array_map(function ($categoria) {
             });
         },
 
+        // Filter Server Side
         filter: () => {
-            const categoria = document.getElementById('categoria').value;
-            console.log("🚀 ~ categoria:", categoria)
-
-            fetch(`?categoria=${categoria}`, {
-                method: 'GET',
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    if (data.status === 'success') {
-                        Swal.fire({
-                            title: "Sucesso!",
-                            text: data.message,
-                            icon: "success",
-                            showCancelButton: false,
-                            confirmButtonText: "OK",
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                window.location.reload();
-                            }
+            document.getElementById('form-filter').addEventListener('submit', function (e) {
+                e.preventDefault();
+                console.log('Filtrando por categoria:', this.categoria.value);
+                fetch(`index/filtraCategoria?categoria=${encodeURIComponent(this.categoria.value)}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        var table = $('#table-products').DataTable();
+                        var newData = data.map(obj => [...Object.values(obj), '']);
+                        table.clear().rows.add(newData).draw();
+                        table.column(6).data().each(function (value, index) {
+                            var id = table.cell(index, 0).data();
+                            var nome = table.cell(index, 1).data();
+                            var actionButtons = `
+                                <a href="edit/${id}" class="btn btn-secondary">Editar</a>
+                                <button onclick="PageProducts.handleDelete(${id}, '${nome}')" class="btn btn-danger">Excluir</button>
+                            `;
+                            table.cell(index, 6).data(actionButtons).draw();
                         });
-                    } else {
-                        Swal.fire({
-                            title: "Erro!",
-                            text: 'Erro ao filtrar os produtos',
-                            icon: "error",
-                            showCancelButton: false,
-                            confirmButtonText: "OK",
-                        });
-                    }
-                });
+                    });
+            });
         }
     };
 

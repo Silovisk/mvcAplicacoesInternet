@@ -55,4 +55,11 @@ class ProdutoController
         header('Content-Type: application/json');
         echo $response;
     }
+
+    public function filterCategory()
+    {
+        $response = $this->produtoService->filterCategory();
+        header('Content-Type: application/json');
+        echo $response;
+    }
 }
